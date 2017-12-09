@@ -1,10 +1,16 @@
 package KursovaGameobject;
 
+import KursovaGame.SnakeEvolution;
+
 public class Snake {
+	SnakeEvolution main;
+	
 	public int d = 0; //напрям змійки
 	public int dlina = 10; //довжина змійки
-	public int snakeX[]=new int[100]; //максимальна кількість елементів змійки по Х
-	public int snakeY[]=new int[100];//максимальна кількість елементів змійки по У
+	@SuppressWarnings("static-access")
+	public int snakeX[]=new int[main.SHIR*main.VIS]; //максимальна кількість елементів змійки по Х
+	@SuppressWarnings("static-access")
+	public int snakeY[]=new int[main.SHIR*main.VIS];//максимальна кількість елементів змійки по У
 	public Snake(int x0, int y0, int x1, int y1) {//конструктор змійки
 		snakeX[0] = x0;
 		snakeY[0] = y0;
@@ -12,6 +18,9 @@ public class Snake {
 		snakeY[1] = y1;
 	}
 	public void move() {
+		
+		
+		
 		for(int h = dlina; h > 0; h--) {//h-елемент, цикл для переміщення
 			snakeX[h]=snakeX[h-1];
 			snakeY[h]=snakeY[h-1];
@@ -26,6 +35,15 @@ public class Snake {
 		if(snakeX[0]==snakeX[k] & snakeY[0]==snakeY[k] )
 			dlina=k-2;
 	}
+	
+	if(snakeX[0] > main.SHIR) snakeX[0]= 0;//умови перетину рамки гри
+	if(snakeX[0] < 0) snakeX[0] = main.SHIR-1;
+	if(snakeY[0] > main.VIS-1) snakeY[0] = 0;
+	if(snakeY[0] < 0) snakeY[0] = main.VIS-1;
+	
 	if(dlina<2)
-		dlina=2;}
+		dlina=2;
+	
+	
+	}
 }

@@ -1,7 +1,6 @@
 package KursovaGame;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.RenderingHints.Key;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -11,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel; //≥мпортуЇмо вс≥ б≥бл≥отеки €к≥ необх≥дн≥
 import javax.swing.Timer;
 
+import KursovaGameobject.Apple;
 import KursovaGameobject.Snake;//≥мпортуЇмо нашу зм≥йку з класу snake
 
 public class SnakeEvolution extends JPanel implements ActionListener {//використовуЇмо слухача под≥й
@@ -20,6 +20,7 @@ public class SnakeEvolution extends JPanel implements ActionListener {//використ
 	public static final int VIS = 15; //¬»—ќ“ј
 	public static final int SPEED =5; // обнова буде 10 раз≥в за секунду
 
+	Apple a = new Apple( (int) (Math.random()*SHIR), (int) (Math.random()*VIS));//координати €блука
 	Snake s = new Snake(1,1,0,1);//kоординати зм≥йки
 	Timer t = new Timer(1000/SPEED, this);
 	public SnakeEvolution() {//створюЇмо конструктор ƒЋя ѕ≈–≈ћ≤ў≈ЌЌя
@@ -43,6 +44,8 @@ for(int yy= 0; yy<=VIS*PIX; yy+=PIX) {
 			q.setColor(color(250, 216,0));//кол≥р зм≥йки
 			q.fillRect(s.snakeX[h]*PIX+1, s.snakeY[h]*PIX+1, PIX-1, PIX-1);//адресуЇмо зм≥йку малюЇмо квадрат
 			}
+		q.setColor(color(255,0,0));//кол≥р €блука
+		q.fillRect(a.posX*PIX+1, a.posY*PIX+1, PIX-1, PIX-1);
 	}
 	public Color color(int RED, int GREEN, int BLUE){//дл€ кольор≥в
 		return new Color(RED, GREEN, BLUE);
@@ -66,6 +69,18 @@ if ((key==KeyEvent.VK_UP)& s.d !=1)s.d =3;}}
 
 	public void actionPerformed(ActionEvent e ) {//тут буде перем≥щенн€ нашоњ зм≥йки
 		s.move();
+		if((s.snakeX[0] == a.posX) & (s.snakeY[0] == a.posY)) {//поњданн€ плоду
+			a.setRandomPosition();//зм≥на позиц≥њ €блука п≥сл€ поњданн€
+			s.dlina++;
+		}
+		for(int f=1; f < s.dlina; f++) {
+			if((s.snakeX[f] == a.posX) & (s.snakeY[f] == a.posY)) {//ф≥кс по€ви €блука на зм≥њ
+				a.setRandomPosition();}//зм≥на по€ви €блука
+		}
+		if((s.snakeX[0] == a.posX) & (s.snakeY[0] == a.posY)) {
+			a.setRandomPosition();
+			s.dlina++;
+		}
 		repaint();
 		
 	}}
