@@ -6,7 +6,7 @@ public class Snake {
 	SnakeEvolution main;
 	
 	public int d = 0; //напрям змійки
-	public int dlina = 10; //довжина змійки
+	public int dlina = 2; //довжина змійки
 	@SuppressWarnings("static-access")
 	public int snakeX[]=new int[main.SHIR*main.VIS]; //максимальна кількість елементів змійки по Х
 	@SuppressWarnings("static-access")
@@ -33,7 +33,7 @@ public class Snake {
 	
 	for(int k=dlina-1; k>0; k--) {
 		if(snakeX[0]==snakeX[k] & snakeY[0]==snakeY[k] )
-			dlina=k-2;
+			dlina=k;
 	}
 	
 	if(snakeX[0] > main.SHIR) snakeX[0]= 0;//умови перетину рамки гри
@@ -46,4 +46,5 @@ public class Snake {
 	
 	
 	}
+
 }

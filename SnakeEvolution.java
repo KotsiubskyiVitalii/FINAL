@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel; //імпортуємо всі бібліотеки які необхідні
 import javax.swing.Timer;
@@ -18,8 +19,7 @@ public class SnakeEvolution extends JPanel implements ActionListener {//використ
 	public static final int PIX = 40; //кількість пікселів 1 умовна клітинка
 	public static final int SHIR = 20; //ширина
 	public static final int VIS = 15; //ВИСОТА
-	public static final int SPEED =5; // обнова буде 10 разів за секунду
-
+	public static final int SPEED =10; // обнова буде 10 разів за секунду;
 	Apple a = new Apple( (int) (Math.random()*SHIR), (int) (Math.random()*VIS));//координати яблука
 	Snake s = new Snake(1,1,0,1);//kоординати змійки
 	Timer t = new Timer(1000/SPEED, this);
@@ -29,9 +29,9 @@ public class SnakeEvolution extends JPanel implements ActionListener {//використ
 	setFocusable(true);
 	}
 	public void paint(Graphics q) {
-		q.setColor(color(5, 200, 0));//колір фона
+		q.setColor(color(50, 150, 50));//колір фона
 		q.fillRect(0, 0, SHIR*PIX, VIS*PIX);//замальовуємо фон
-		//q.setColor (color(250,0,0));//колір ліній
+		//q.setColor (color(5,255,0));//колір ліній
 		//малюємо лінії
 		
 	for(int xx= 0; xx<=SHIR*PIX; xx+=PIX) {//малюємо вертикальні лінії
@@ -51,14 +51,19 @@ for(int yy= 0; yy<=VIS*PIX; yy+=PIX) {
 		return new Color(RED, GREEN, BLUE);
 	}
 	public static void main(String[] args) {//головна функція
+		
 		JFrame f = new JFrame();//робимо віконце 
+		f.setTitle("SnakeEvolution: Антигорящий пукан");
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //для закривання операції
 		f.setResizable(false);
 		f.setSize(SHIR*PIX+7, VIS*PIX+29);//задаємо розміри екрану
 		f.add(new SnakeEvolution());
 		f.setLocationRelativeTo(null);//вікно по центру
 		f.setVisible(true);
-	}
+		
+			}
+	
+
 	private class Key extends KeyAdapter{//клас для клавіш
 public void keyPressed(KeyEvent kE) {//клавіша нажата
 int key = kE.getKeyCode();
@@ -82,5 +87,6 @@ if ((key==KeyEvent.VK_UP)& s.d !=1)s.d =3;}}
 			s.dlina++;
 		}
 		repaint();
+		System.out.print(s.dlina);
 		
 	}}
