@@ -19,7 +19,7 @@ public class SnakeEvolution extends JPanel implements ActionListener {//використ
 	public static final int PIX = 40; //к≥льк≥сть п≥ксел≥в 1 умовна кл≥тинка
 	public static final int SHIR = 20; //ширина
 	public static final int VIS = 15; //¬»—ќ“ј
-	public static final int SPEED =10; // обнова буде 10 раз≥в за секунду;
+	public static final int SPEED =5; // обнова буде 5 раз≥в за секунду;
 	Apple a = new Apple( (int) (Math.random()*SHIR), (int) (Math.random()*VIS));//координати €блука
 	Snake s = new Snake(1,1,0,1);//kоординати зм≥йки
 	Timer t = new Timer(1000/SPEED, this);
@@ -41,11 +41,18 @@ for(int yy= 0; yy<=VIS*PIX; yy+=PIX) {
 			q.drawLine(0, yy, SHIR*PIX, yy);			
 		}
 		for(int h=0;h<s.dlina;h++) {
+			q.setColor(color(208, 104,0));//кол≥р зм≥йки
+			q.fillRect(s.snakeX[h]*PIX, s.snakeY[h]*PIX, PIX+1, PIX+1);//адресуЇмо зм≥йку малюЇмо квадрат
 			q.setColor(color(250, 216,0));//кол≥р зм≥йки
-			q.fillRect(s.snakeX[h]*PIX+1, s.snakeY[h]*PIX+1, PIX-1, PIX-1);//адресуЇмо зм≥йку малюЇмо квадрат
+			q.fillRect(s.snakeX[h]*PIX+2, s.snakeY[h]*PIX+2, PIX-3, PIX-3);//адресуЇмо зм≥йку малюЇмо квадрат
+			q.setColor(color(255, 255,255));//кол≥р зм≥йки
+			q.fillRect(s.snakeX[h]*PIX+10, s.snakeY[h]*PIX+10, PIX-32, PIX-32);//адресуЇмо зм≥йку малюЇмо квадрат
 			}
 		q.setColor(color(255,0,0));//кол≥р €блука
-		q.fillRect(a.posX*PIX+1, a.posY*PIX+1, PIX-1, PIX-1);
+		 q.fillOval(a.posX*PIX+1, a.posY*PIX+1, PIX, PIX);
+		 q.setColor(color(255,255,255));//кол≥р €блука
+		 q.fillOval(a.posX*PIX+7, a.posY*PIX+10, PIX/6, PIX/2);
+		//q.fillRect(a.posX*PIX+1, a.posY*PIX+1, PIX-1, PIX-1);
 	}
 	public Color color(int RED, int GREEN, int BLUE){//дл€ кольор≥в
 		return new Color(RED, GREEN, BLUE);
@@ -67,10 +74,10 @@ for(int yy= 0; yy<=VIS*PIX; yy+=PIX) {
 	private class Key extends KeyAdapter{//клас дл€ клав≥ш
 public void keyPressed(KeyEvent kE) {//клав≥ша нажата
 int key = kE.getKeyCode();
-if ((key==KeyEvent.VK_RIGHT)& s.d !=2)s.d =0;//напр€мки руху зм≥йки
-if ((key==KeyEvent.VK_DOWN)& s.d !=3)s.d =1;
-if ((key==KeyEvent.VK_LEFT)& s.d !=0)s.d =2;
-if ((key==KeyEvent.VK_UP)& s.d !=1)s.d =3;}}
+if ((key==KeyEvent.VK_D)& s.d !=2)s.d =0;//напр€мки руху зм≥йки
+if ((key==KeyEvent.VK_S)& s.d !=3)s.d =1;
+if ((key==KeyEvent.VK_A)& s.d !=0)s.d =2;
+if ((key==KeyEvent.VK_W)& s.d !=1)s.d =3;}}
 
 	public void actionPerformed(ActionEvent e ) {//тут буде перем≥щенн€ нашоњ зм≥йки
 		s.move();
@@ -86,7 +93,5 @@ if ((key==KeyEvent.VK_UP)& s.d !=1)s.d =3;}}
 			a.setRandomPosition();
 			s.dlina++;
 		}
-		repaint();
-		System.out.print(s.dlina);
-		
+		repaint();		
 	}}
