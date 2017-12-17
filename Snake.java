@@ -1,10 +1,9 @@
 package KursovaGameobject;
+import javax.swing.JFrame;
 
 import KursovaGame.SnakeEvolution;
-
 public class Snake {
 	SnakeEvolution main;
-	
 	public int d = 0; //напрям змійки
 	public int dlina = 2; //довжина змійки
 	@SuppressWarnings("static-access")
@@ -16,15 +15,12 @@ public class Snake {
 		snakeY[0] = y0;
 		snakeX[1] = x1;
 		snakeY[1] = y1;
+		
 	}
 	public void move() {
-		
-		
-		
 		for(int h = dlina; h > 0; h--) {//h-елемент, цикл для переміщення
 			snakeX[h]=snakeX[h-1];
 			snakeY[h]=snakeY[h-1];
-			
 		}
 		if(d==0) snakeX[0]++;//здвиг вправо
 		if(d==1) snakeY[0]++;//здвиг вниз

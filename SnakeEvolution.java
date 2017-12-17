@@ -1,11 +1,13 @@
 package KursovaGame;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
+import java.net.URL;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel; //імпортуємо всі бібліотеки які необхідні
@@ -16,10 +18,10 @@ import KursovaGameobject.Snake;//імпортуємо нашу змійку з класу snake
 
 public class SnakeEvolution extends JPanel implements ActionListener {//використовуємо слухача подій
 
-	public static final int PIX = 40; //кількість пікселів 1 умовна клітинка
+	public static final int PIX = 40; //кількість пікселів, 1 умовна клітинка
 	public static final int SHIR = 20; //ширина
 	public static final int VIS = 15; //ВИСОТА
-	public static final int SPEED =5; // обнова буде 5 разів за секунду;
+	public static final int SPEED =4; // обнова буде 4 разів за секунду;
 	Apple a = new Apple( (int) (Math.random()*SHIR), (int) (Math.random()*VIS));//координати яблука
 	Snake s = new Snake(1,1,0,1);//kоординати змійки
 	Timer t = new Timer(1000/SPEED, this);
@@ -58,6 +60,8 @@ for(int yy= 0; yy<=VIS*PIX; yy+=PIX) {
 		return new Color(RED, GREEN, BLUE);
 	}
 	public static void main(String[] args) {//головна функція
+	
+
 		
 		JFrame f = new JFrame();//робимо віконце 
 		f.setTitle("SnakeEvolution: Антигорящий пукан");
@@ -67,17 +71,17 @@ for(int yy= 0; yy<=VIS*PIX; yy+=PIX) {
 		f.add(new SnakeEvolution());
 		f.setLocationRelativeTo(null);//вікно по центру
 		f.setVisible(true);
-		
+	
 			}
 	
 
 	private class Key extends KeyAdapter{//клас для клавіш
 public void keyPressed(KeyEvent kE) {//клавіша нажата
 int key = kE.getKeyCode();
-if ((key==KeyEvent.VK_D)& s.d !=2)s.d =0;//напрямки руху змійки
-if ((key==KeyEvent.VK_S)& s.d !=3)s.d =1;
-if ((key==KeyEvent.VK_A)& s.d !=0)s.d =2;
-if ((key==KeyEvent.VK_W)& s.d !=1)s.d =3;}}
+if ((key==KeyEvent.VK_D & s.d !=2)|key==KeyEvent.VK_RIGHT & s.d !=2)s.d =0;//напрямки руху змійки
+if ((key==KeyEvent.VK_S & s.d !=3)|key==KeyEvent.VK_DOWN & s.d !=3)s.d =1;
+if ((key==KeyEvent.VK_A & s.d !=0)|key==KeyEvent.VK_LEFT & s.d !=0)s.d =2;
+if ((key==KeyEvent.VK_W & s.d !=1)|key==KeyEvent.VK_UP & s.d !=1)s.d =3;}}
 
 	public void actionPerformed(ActionEvent e ) {//тут буде переміщення нашої змійки
 		s.move();
