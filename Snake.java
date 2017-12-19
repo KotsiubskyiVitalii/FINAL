@@ -1,6 +1,6 @@
 package KursovaGameobject;
-import javax.swing.JFrame;
 import KursovaGame.SnakeEvolution;
+
 public class Snake {
 	SnakeEvolution main;
 	public int d = 0; //напрям змійки
@@ -30,6 +30,7 @@ public class Snake {
 		if(snakeX[0]==snakeX[k] & snakeY[0]==snakeY[k] )
 			dlina=k;
 	}
+	
 	
 	if(snakeX[0] > main.SHIR) snakeX[0]= 0;//умови перетину рамки гри
 	if(snakeX[0] < 0) snakeX[0] = main.SHIR-1;

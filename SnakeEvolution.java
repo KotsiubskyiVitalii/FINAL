@@ -1,13 +1,10 @@
 package KursovaGame;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.net.URL;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel; //імпортуємо всі бібліотеки які необхідні
@@ -114,6 +111,15 @@ if (key==KeyEvent.VK_UP & s2.d2 !=1)s2.d2 =3;}}
 			if((s2.snake2X[f] == a.posX) & (s2.snake2Y[f] == a.posY)) {//фікс появи яблука на змії
 				a.setRandomPosition();}//зміна появи яблука
 		}
+		for(int k=s.dlina-1; k>0; k--) {
+			if(s.snakeX[0]==s2.snake2X[k] & s.snakeY[0]==s2.snake2Y[k] )//поїдання першої змії другу
+				s2.dlina2=k;
+		}
+		for(int k=s2.dlina2-1; k>0; k--) {
+			if(s2.snake2X[0]==s.snakeX[k] & s2.snake2Y[0]==s.snakeY[k] )//поїдання другої змії першу
+				s.dlina=k;
+		}
+		
 		if((s.snakeX[0] == a.posX) & (s.snakeY[0] == a.posY)) {
 			a.setRandomPosition();
 			s.dlina++;
