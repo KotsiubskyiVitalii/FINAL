@@ -15,7 +15,7 @@ import javax.swing.Timer;
 
 import KursovaGameobject.Apple;
 import KursovaGameobject.Snake;//імпортуємо нашу змійку з класу snake
-
+import KursovaGameobject.Snake2;
 public class SnakeEvolution extends JPanel implements ActionListener {//використовуємо слухача подій
 
 	public static final int PIX = 40; //кількість пікселів, 1 умовна клітинка
@@ -24,6 +24,7 @@ public class SnakeEvolution extends JPanel implements ActionListener {//використ
 	public static final int SPEED =4; // обнова буде 4 разів за секунду;
 	Apple a = new Apple( (int) (Math.random()*SHIR), (int) (Math.random()*VIS));//координати яблука
 	Snake s = new Snake(1,1,0,1);//kоординати змійки
+	Snake2 s2 = new Snake2(1,13,0,13);
 	Timer t = new Timer(1000/SPEED, this);
 	public SnakeEvolution() {//створюємо конструктор ДЛЯ ПЕРЕМІЩЕННЯ
 	t.start();
@@ -45,11 +46,18 @@ for(int yy= 0; yy<=VIS*PIX; yy+=PIX) {
 		for(int h=0;h<s.dlina;h++) {
 			q.setColor(color(208, 104,0));//колір змійки
 			q.fillRect(s.snakeX[h]*PIX, s.snakeY[h]*PIX, PIX+1, PIX+1);//адресуємо змійку малюємо квадрат
-			q.setColor(color(250, 216,0));//колір змійки
+			q.setColor(color(0, 0,255));//колір змійки
 			q.fillRect(s.snakeX[h]*PIX+2, s.snakeY[h]*PIX+2, PIX-3, PIX-3);//адресуємо змійку малюємо квадрат
 			q.setColor(color(255, 255,255));//колір змійки
 			q.fillRect(s.snakeX[h]*PIX+10, s.snakeY[h]*PIX+10, PIX-32, PIX-32);//адресуємо змійку малюємо квадрат
-			}
+				}
+		for(int h=0;h<s2.dlina2;h++) {q.setColor(color(208, 104,0));//колір змійки
+		q.fillRect(s2.snake2X[h]*PIX, s2.snake2Y[h]*PIX, PIX+1, PIX+1);//адресуємо змійку малюємо квадрат
+		q.setColor(color(250, 216,0));//колір змійки
+		q.fillRect(s2.snake2X[h]*PIX+2, s2.snake2Y[h]*PIX+2, PIX-3, PIX-3);//адресуємо змійку малюємо квадрат
+		q.setColor(color(255, 255,255));//колір змійки
+		q.fillRect(s2.snake2X[h]*PIX+10, s2.snake2Y[h]*PIX+10, PIX-32, PIX-32);//адресуємо змійку малюємо квадрат
+		}
 		q.setColor(color(255,0,0));//колір яблука
 		 q.fillOval(a.posX*PIX+1, a.posY*PIX+1, PIX, PIX);
 		 q.setColor(color(255,255,255));//колір яблука
@@ -78,24 +86,41 @@ for(int yy= 0; yy<=VIS*PIX; yy+=PIX) {
 	private class Key extends KeyAdapter{//клас для клавіш
 public void keyPressed(KeyEvent kE) {//клавіша нажата
 int key = kE.getKeyCode();
-if ((key==KeyEvent.VK_D & s.d !=2)|key==KeyEvent.VK_RIGHT & s.d !=2)s.d =0;//напрямки руху змійки
-if ((key==KeyEvent.VK_S & s.d !=3)|key==KeyEvent.VK_DOWN & s.d !=3)s.d =1;
-if ((key==KeyEvent.VK_A & s.d !=0)|key==KeyEvent.VK_LEFT & s.d !=0)s.d =2;
-if ((key==KeyEvent.VK_W & s.d !=1)|key==KeyEvent.VK_UP & s.d !=1)s.d =3;}}
+if ((key==KeyEvent.VK_D & s.d !=2))s.d =0;//напрямки руху змійки
+if ((key==KeyEvent.VK_S & s.d !=3))s.d =1;
+if ((key==KeyEvent.VK_A & s.d !=0))s.d =2;
+if ((key==KeyEvent.VK_W & s.d !=1))s.d =3;
+if (key==KeyEvent.VK_RIGHT & s2.d2 !=2)s2.d2 =0;//напрямки руху змійки
+if (key==KeyEvent.VK_DOWN & s2.d2 !=3)s2.d2 =1;
+if (key==KeyEvent.VK_LEFT & s2.d2 !=0)s2.d2 =2;
+if (key==KeyEvent.VK_UP & s2.d2 !=1)s2.d2 =3;}}
 
 	public void actionPerformed(ActionEvent e ) {//тут буде переміщення нашої змійки
 		s.move();
+		s2.move();
 		if((s.snakeX[0] == a.posX) & (s.snakeY[0] == a.posY)) {//поїдання плоду
 			a.setRandomPosition();//зміна позиції яблука після поїдання
 			s.dlina++;
+		}
+		if((s2.snake2X[0] == a.posX) & (s2.snake2Y[0] == a.posY)) {//поїдання плоду
+			a.setRandomPosition();//зміна позиції яблука після поїдання
+			s2.dlina2++;
 		}
 		for(int f=1; f < s.dlina; f++) {
 			if((s.snakeX[f] == a.posX) & (s.snakeY[f] == a.posY)) {//фікс появи яблука на змії
 				a.setRandomPosition();}//зміна появи яблука
 		}
+		for(int f=1; f < s2.dlina2; f++) {
+			if((s2.snake2X[f] == a.posX) & (s2.snake2Y[f] == a.posY)) {//фікс появи яблука на змії
+				a.setRandomPosition();}//зміна появи яблука
+		}
 		if((s.snakeX[0] == a.posX) & (s.snakeY[0] == a.posY)) {
 			a.setRandomPosition();
 			s.dlina++;
+		}
+		if((s2.snake2X[0] == a.posX) & (s2.snake2Y[0] == a.posY)) {
+			a.setRandomPosition();
+			s2.dlina2++;
 		}
 		repaint();		
 	}}

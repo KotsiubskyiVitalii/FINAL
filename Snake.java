@@ -1,6 +1,5 @@
 package KursovaGameobject;
 import javax.swing.JFrame;
-
 import KursovaGame.SnakeEvolution;
 public class Snake {
 	SnakeEvolution main;
