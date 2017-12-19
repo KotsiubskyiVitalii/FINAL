@@ -110,12 +110,14 @@ if (key==KeyEvent.VK_UP & s2.d2 !=1)s2.d2 =3;}}
 		for(int f=1; f < s2.dlina2; f++) {
 			if((s2.snake2X[f] == a.posX) & (s2.snake2Y[f] == a.posY)) {//фікс появи яблука на змії
 				a.setRandomPosition();}//зміна появи яблука
+		
+			
 		}
-		for(int k=s.dlina-1; k>0; k--) {
+		for(int k=s.dlina; k>0; k--) {
 			if(s.snakeX[0]==s2.snake2X[k] & s.snakeY[0]==s2.snake2Y[k] )//поїдання першої змії другу
 				s2.dlina2=k;
 		}
-		for(int k=s2.dlina2-1; k>0; k--) {
+		for(int k=s2.dlina2; k>0; k--) {
 			if(s2.snake2X[0]==s.snakeX[k] & s2.snake2Y[0]==s.snakeY[k] )//поїдання другої змії першу
 				s.dlina=k;
 		}
